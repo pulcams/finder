@@ -167,7 +167,19 @@ def index_page():
             getcall.close()
             del getcall
 
-            return template('views/results',fields=r, bib=None,callno=True)
+            return template('views/results',fields=r, bib=None,callno=True,title=False)
+            oradb.close()
+
+        elif type == 'title':
+            getti = oradb.cursor()
+            getti.execute(AUTHCALLNO_STRING + " WHERE BIB_TEXT.TITLE_BRIEF like '%s%%' ORDER BY MFHD_MASTER.NORMALIZED_CALL_NO" % num)
+            r = getti.fetchall()
+            print(r)
+            getti.close()
+            del getti
+
+            return template('views/results',fields=r,
+            bib=None, callno=False, title=True)
             oradb.close()
             
         elif type == 'auth':
@@ -178,7 +190,7 @@ def index_page():
             del getauth
 
             return template('views/results',fields=r,
-            bib=None, callno=None)
+            bib=None, callno=None, title=False)
             oradb.close()
     else:
         return template('index')
