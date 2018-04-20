@@ -19,6 +19,7 @@ select {
 <option value="bib">bib id</option>
 <option value="item">item id</option>
 <option value="auth">author</option>
+<option value="title">title</option>
 <option value="call">call no</option>
 </select>
 <input name="num" type="text" value=""/>

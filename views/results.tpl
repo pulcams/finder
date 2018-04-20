@@ -55,7 +55,7 @@
 		%end 
 	</table>
 	%end
-% elif fields and not bib and (callno == None):
+% elif fields and not bib and (callno == None and title == False):
 	<table>
 		<tr><th>author</th><th>title</th><th>call no</th></tr>
 		% for field in fields:
@@ -67,6 +67,13 @@
 		<tr><th>call no</th><th>author</th></th><th>title</th></tr>
 		% for field in fields:
 		<tr><td>{{field[2]}}</td><td>{{field[0]}}</td><td>{{field[1]}}</td></tr>
+		% end
+	</table>
+% elif fields and not bib and (callno == False and title == True):
+	<table>
+		<tr><th>title</th><th>author</th></th><th>call no</th></tr>
+		% for field in fields:
+		<tr><td>{{field[1]}}</td><td>{{field[0]}}</td><td>{{field[2]}}</td></tr>
 		% end
 	</table>
 % else:
